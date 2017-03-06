@@ -26,7 +26,7 @@ function nextTick() {
 
 //determines if bird lives or dies
 function determineLife(x, y){
-	if(gridArray[x-1 == 'hawk' || y-1 == 'hawk' || x+1 == 'hawk' || y+1 == 'hawk'])
+	if(gridArray[x-1] == 'hawk' || gridArray[y-1] == 'hawk' || gridArray[x+1] == 'hawk' || gridArray[y+1] == 'hawk')
 		return true;	
 }
 
