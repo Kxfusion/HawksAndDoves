@@ -25,9 +25,33 @@ function nextTick() {
 }
 
 //determines if bird lives or dies
-function determineLife(x, y){
-	if(gridArray[x-1] == 'hawk' || gridArray[y-1] == 'hawk' || gridArray[x+1] == 'hawk' || gridArray[y+1] == 'hawk')
-		return true;	
+function determineLife(x, y, first){
+	if(first == true){
+		first = false;
+		up = determineLife(y-1, x, first);
+		down = determineLife(y+1, x, first)
+		right = determineLife(y, x-1, first) 
+		left = determineLife(y, x+1, first)
+		if(up == true || down == true || right == true || down == true){
+			//dead
+			return true;
+		}
+		else{
+			//alive
+			return false;
+		}
+	}
+	else if(x != -1 && y != -1){
+		if(gridArray[x][y].birdType == 'hawk'){
+			return true;
+		}	
+		else{
+			return false;
+		}
+	}
+	else{
+		return false;
+	}
 }
 
 function generateGridArray(width, height) {
