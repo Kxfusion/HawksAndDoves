@@ -3,11 +3,26 @@
 //an array that keeps track of the grid
 var gridArray = [];
 
-//generate a 10x10 grid?
-generateGridArray(10, 10);
+//how big we want our grid to be
+var gridHeight = 10;
+var gridWidth = 10;
+
+//generate the initial grid
+generateGridArray(gridWidth, gridHeight);
 
 //render the grid
 renderGridArray()
+
+//every 5 seconds, update the grid
+setInterval(function() {
+    nextTick();
+}, 5000);
+
+//updates the grid
+function nextTick() {
+    generateGridArray(gridWidth, gridHeight);
+    renderGridArray()
+}
 
 function generateGridArray(width, height) {
 
@@ -47,7 +62,7 @@ function renderGridArray() {
             newGridHtml += '<img src="images/';
             newGridHtml += gridArray[i][j].birdType == "hawk" ? 'hawk' : 'dove';
             newGridHtml += '.png">';
-            
+
         }
         newGridHtml += '</div>';
     }
