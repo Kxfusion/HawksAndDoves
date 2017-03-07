@@ -20,8 +20,37 @@ setInterval(function() {
 
 //updates the grid
 function nextTick() {
-    generateGridArray(gridWidth, gridHeight);
+    updateGrid(gridWidth, gridHeight);
     renderGridArray()
+}
+
+function updateGrid(Width, Height){
+	var checkGrid = [];
+	for(var a = 0; a < Width; a++){
+		checkGrid[a] = [];
+		for(var b = 0; b < Height; b++){
+			checkGrid[a][b] = false;
+		}
+	}
+	for(var i = 0; i < Height; i++) {
+        for(var j = 0; j < Width; j++) {
+			checkGrid[j][i] = determineLife(i, j, true);
+		}
+	}
+	
+	for(var i = 0; i < Height; i++) {
+        for(var j = 0; j < Width; j++) {
+			if(checkGrid[i][j] == true){
+				if(Math.floor(Math.random() * 2) == 1){
+					gridArray[i][j].birdType = 'hawk';
+				}
+				
+				else{
+					gridArray[i][j].birdType = 'dove';
+				}
+			}
+		}
+	}
 }
 
 //determines if bird lives or dies
@@ -29,10 +58,10 @@ function determineLife(x, y, first){
 	if(first == true){
 		first = false;
 		up = determineLife(y-1, x, first);
-		down = determineLife(y+1, x, first)
-		right = determineLife(y, x-1, first) 
-		left = determineLife(y, x+1, first)
-		if(up == true || down == true || right == true || down == true){
+		down = determineLife(y+1, x, first);
+		right = determineLife(y, x-1, first); 
+		left = determineLife(y, x+1, first);
+		if(up == true || down == true || right == true || left == true){
 			//dead
 			return true;
 		}
@@ -41,7 +70,7 @@ function determineLife(x, y, first){
 			return false;
 		}
 	}
-	else if(x != -1 && y != -1){
+	else if(x < gridWidth && y < gridHeight && x != -1 && y != -1){
 		if(gridArray[x][y].birdType == 'hawk'){
 			return true;
 		}	
@@ -63,8 +92,7 @@ function generateGridArray(width, height) {
     for (var i = 0; i < height; i++) {
         var row = [];
         for (var j = 0; j < width; j++) {
-
-
+			
             //flip a coin, decide if bird is hawk or a dove
             if (Math.floor(Math.random() * 2) == 1) {
                 row.push({
