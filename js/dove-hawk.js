@@ -57,10 +57,10 @@ function updateGrid(Width, Height){
 function determineLife(x, y, first){
 	if(first == true){
 		first = false;
-		up = determineLife(y-1, x, first);
-		down = determineLife(y+1, x, first);
-		right = determineLife(y, x-1, first); 
-		left = determineLife(y, x+1, first);
+		var up = determineLife(y-1, x, first);
+		var down = determineLife(y+1, x, first);
+		var right = determineLife(y, x-1, first); 
+		var left = determineLife(y, x+1, first);
 		if(up == true || down == true || right == true || left == true){
 			//dead
 			return true;
