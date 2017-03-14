@@ -1,15 +1,6 @@
-.cell{
-    float:left;
-    height: 30px; 
-    width: 30px;
-}
-.hawk{
-    background-color: red;
-}
 
-.dove{
-    background-color: navajowhite;
-}
-.row {
-    clear:left
+
+#grid {
+   margin: auto;
+   width: 90%;
 }

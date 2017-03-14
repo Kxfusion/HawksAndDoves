@@ -3,23 +3,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragdealer/0.9.8/dragdealer.min.js"></script>
     <link rel="stylesheet" href="css/doveHawk.css">
     <link rel="stylesheet" href="css/dragdealer.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div id="slider" class="dragdealer">
+    <div class="container">
+        <h1 class="text-center">Dove Hawk Grid Simulator</h1>
         <div class="row">
-            <div class="handle red-bar">
-                <span class="value"></span>%
+            <div class="col-md-3">
+                <label>Chance of new bird being a dove: </label>
+                <div id="slider" class="dragdealer">
+                    <div class="handle red-bar">
+                        <span class="value"></span>%
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <br>
-            <br>
-            <div id="grid">
+            <div class="col-md-9">
+                <div id="grid" class="center-block"></div>
             </div>
         </div>
         <br>
         <br>
-        <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+        <div>Icons made by
+            <a href="http://www.freepik.com" title="Freepik">Freepik</a> from
+            <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+        </div>
+    </div>
 </body>
 <script src="js/dove-hawk.js"></script>
