@@ -6,8 +6,8 @@
 var gridArray = [];
 
 //how big we want our grid to be
-var gridHeight = 8;
-var gridWidth = 8;
+var gridHeight = 10;
+var gridWidth = 10;
 
 //how long we want each turn to last (in ms)
 var turnTime = 1000;
@@ -22,10 +22,9 @@ generateGridArray();
 //render the grid
 renderGridArray();
 
-//every 5 seconds, start a new turn
-setInterval(function() {
-	nextTick();
-}, turnTime);
+//start the first turn
+nextTick();
+
 
 //updates the grid
 function nextTick() {
@@ -44,6 +43,9 @@ function nextTick() {
 
 		//update the GUI
 		renderGridArray();
+		setTimeout(function() {
+			nextTick();
+		}, turnTime / 2);
 	}, turnTime / 2);
 }
 
@@ -167,13 +169,22 @@ function renderGridArray() {
 
 
 //code relating to the slider
-var slider = new Dragdealer('slider', {
+var doveSlider = new Dragdealer('dove_slider', {
+	x: probabilityOfDoveSpawning,
 	animationCallback: function(x) {
 		//update the probability of the the dove spawning
 		probabilityOfDoveSpawning = x;
-		$('#slider .value').text(Math.round(x * 100));
+		$('#dove_slider .value').text(Math.round(x * 100));
 	}
 });
 
-//set the initial value
-slider.setValue(0.5, 0, true);
+
+
+var timeSlider = new Dragdealer('time_slider', {
+	x: (turnTime / 10000),
+	animationCallback: function(x) {
+		//update the time of each turn
+		turnTime = x * 10000;
+		$('#time_slider .value').text(Math.round(x * 10));
+	}
+});

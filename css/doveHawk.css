@@ -4,3 +4,8 @@
    margin: auto;
    width: 90%;
 }
+
+img {
+  width:32px;
+  height:32px;
+}
