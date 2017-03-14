@@ -26,14 +26,21 @@ renderGridArray();
 nextTick();
 
 
-//updates the grid
+//this function starts each new turn
+// the function will recursively call itself after a timeout
+// this is what keeps the game going
 function nextTick() {
 
 	//mark all relevant birds for death
 	killBirds();
 
-	//update the GUI so that we can see which birds are alive
-	renderGridArray();
+	//we can update to GUI to show which were killed during this round
+	// however this isn't worth doing if we have extremely short turns
+	// since it will all happen too fast to be noticeable
+	if (turnTime > 100) {
+		//update the GUI so that we can see which birds are alive
+		renderGridArray();
+	}
 
 	//halfway through the turn, we replace the birds with new one's
 	setTimeout(function() {
@@ -43,9 +50,12 @@ function nextTick() {
 
 		//update the GUI
 		renderGridArray();
+
+		//we wait a bit and then start the next turn
 		setTimeout(function() {
 			nextTick();
 		}, turnTime / 2);
+
 	}, turnTime / 2);
 }
 
@@ -185,6 +195,6 @@ var timeSlider = new Dragdealer('time_slider', {
 	animationCallback: function(x) {
 		//update the time of each turn
 		turnTime = x * 10000;
-		$('#time_slider .value').text(Math.round(x * 10));
+		$('#time_slider .value').text(Math.round(x * 100) / 10);
 	}
 });
