@@ -6,11 +6,15 @@
 var gridArray = [];
 
 //how big we want our grid to be
-var gridHeight = 10;
-var gridWidth = 10;
+var gridHeight = 8;
+var gridWidth = 8;
 
 //how long we want each turn to last (in ms)
-var turnTime = 10000;
+var turnTime = 1000;
+
+//when a bird is created, the probability that it will be a dove 
+// probabilities go from 0 to 1 (0.5 is equivalent to 50%, 0.75 is 75%, etc)
+var probabilityOfDoveSpawning = 0.5;
 
 //generate the initial grid
 generateGridArray();
@@ -40,14 +44,14 @@ function nextTick() {
 
 		//update the GUI
 		renderGridArray();
-	}, turnTime/2);
+	}, turnTime / 2);
 }
 
 //returns a string, either dove or hawk
 function chooseBirdType() {
 
 	//  50/50 chance of being a dove or a hawk
-	if (Math.floor(Math.random() * 2) === 1) {
+	if (Math.random() > probabilityOfDoveSpawning) {
 		return 'hawk';
 	} else {
 		return 'dove';
@@ -160,3 +164,16 @@ function renderGridArray() {
 	//update the grid
 	$('#grid').html(newGridHtml);
 }
+
+
+//code relating to the slider
+var slider = new Dragdealer('slider', {
+	animationCallback: function(x) {
+		//update the probability of the the dove spawning
+		probabilityOfDoveSpawning = x;
+		$('#slider .value').text(Math.round(x * 100));
+	}
+});
+
+//set the initial value
+slider.setValue(0.5, 0, true);
